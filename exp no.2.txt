@@ -1,0 +1,98 @@
+mysql> create table course(courseno int,course_type char,semno int hallno int);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'hallno int)' at line 1
+mysql> create table course(courseno int,course_type char,semno int,hallno int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc course;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| courseno    | int     | YES  |     | NULL    |       |
+| course_type | char(1) | YES  |     | NULL    |       |
+| semno       | int     | YES  |     | NULL    |       |
+| hallno      | int     | YES  |     | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table course add primary key(semno);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc course;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| courseno    | int     | YES  |     | NULL    |       |
+| course_type | char(1) | YES  |     | NULL    |       |
+| semno       | int     | NO   | PRI | NULL    |       |
+| hallno      | int     | YES  |     | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table dept
+    -> create table dept(dept_name char,dept_no int,dept_head char);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'create table dept(dept_name char,dept_no int,dept_head char)' at line 2
+mysql> create table dept(dept_name char,dept_no int,dept_head char);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc dept;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| dept_name | char(1) | YES  |     | NULL    |       |
+| dept_no   | int     | YES  |     | NULL    |       |
+| dept_head | char(1) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table dept add foreign key(dept_no) references course(semno);
+Query OK, 0 rows affected (0.12 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc dept;
++-----------+---------+------+-----+---------+-------+
+| Field     | Type    | Null | Key | Default | Extra |
++-----------+---------+------+-----+---------+-------+
+| dept_name | char(1) | YES  |     | NULL    |       |
+| dept_no   | int     | YES  | MUL | NULL    |       |
+| dept_head | char(1) | YES  |     | NULL    |       |
++-----------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table faculty;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create database faculty;
+ERROR 1007 (HY000): Can't create database 'faculty'; database exists
+mysql> use faculty;
+Database changed
+mysql> create table faculty(faculty_no int,gender char(1));
+ERROR 1050 (42S01): Table 'faculty' already exists
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| fac_no   | int      | NO   | PRI | NULL    |       |
+| fac_name | char(15) | YES  |     | NULL    |       |
+| gender   | char(1)  | YES  |     | NULL    |       |
+| dob      | int      | YES  |     | NULL    |       |
+| mob_no   | int      | YES  |     | NULL    |       |
+| dept_no  | int      | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table faculty add check (gender='m'or'f');
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc faculty;
++----------+----------+------+-----+---------+-------+
+| Field    | Type     | Null | Key | Default | Extra |
++----------+----------+------+-----+---------+-------+
+| fac_no   | int      | NO   | PRI | NULL    |       |
+| fac_name | char(15) | YES  |     | NULL    |       |
+| gender   | char(1)  | YES  |     | NULL    |       |
+| dob      | int      | YES  |     | NULL    |       |
+| mob_no   | int      | YES  |     | NULL    |       |
+| dept_no  | int      | YES  |     | NULL    |       |
++----------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
