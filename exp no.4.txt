@@ -1,0 +1,64 @@
+mysql> use student;
+Database changed
+mysql> desc employee;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| emp_id   | varchar(225) | YES  |     | NULL    |       |
+| emp_name | varchar(225) | YES  |     | NULL    |       |
+| emp_age  | int          | YES  |     | NULL    |       |
+| company  | varchar(225) | YES  |     | NULL    |       |
+| salary   | int          | YES  |     | NULL    |       |
++----------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into employee values('101','nani','25','infosys','50000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++--------+----------+---------+---------+--------+
+| emp_id | emp_name | emp_age | company | salary |
++--------+----------+---------+---------+--------+
+| 102    | nani     |      25 | Tata    |  45000 |
+| 103    | bhanu    |      25 | Tata    |  40000 |
+| 101    | nani     |      25 | infosys |  50000 |
++--------+----------+---------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delete from employee where emp_name='nani';
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> select * from employee;
++--------+----------+---------+---------+--------+
+| emp_id | emp_name | emp_age | company | salary |
++--------+----------+---------+---------+--------+
+| 103    | bhanu    |      25 | Tata    |  40000 |
++--------+----------+---------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> insert into employee valuse('104','sasi','25','hp','700000');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'valuse('104','sasi','25','hp','700000')' at line 1
+mysql> insert into employee values('104','sasi','25','hp','700000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++--------+----------+---------+---------+--------+
+| emp_id | emp_name | emp_age | company | salary |
++--------+----------+---------+---------+--------+
+| 103    | bhanu    |      25 | Tata    |  40000 |
+| 104    | sasi     |      25 | hp      | 700000 |
++--------+----------+---------+---------+--------+
+2 rows in set (0.00 sec)
+
+mysql> update employee set emp_name = 'sasi kiran',emp_age = '30',company = 'wipro',salary = '60000' where emp_id = '103';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from employee;
++--------+------------+---------+---------+--------+
+| emp_id | emp_name   | emp_age | company | salary |
++--------+------------+---------+---------+--------+
+| 103    | sasi kiran |      30 | wipro   |  60000 |
+| 104    | sasi       |      25 | hp      | 700000 |
++--------+------------+---------+---------+--------+
+2 rows in set (0.00 sec)
