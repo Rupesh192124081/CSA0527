@@ -1,0 +1,53 @@
+mysql> use employee;
+Database changed
+mysql> create table employee(emp_id int,emp_name char(1),emp_dept char(1),emp_salary int,emp_age int);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc employee;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| emp_id     | int     | YES  |     | NULL    |       |
+| emp_name   | char(1) | YES  |     | NULL    |       |
+| emp_dept   | char(1) | YES  |     | NULL    |       |
+| emp_salary | int     | YES  |     | NULL    |       |
+| emp_age    | int     | YES  |     | NULL    |       |
++------------+---------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> alter table emp add emp_position char;
+ERROR 1146 (42S02): Table 'employee.emp' doesn't exist
+mysql> alter table emp add emp_position char;
+ERROR 1146 (42S02): Table 'employee.emp' doesn't exist
+mysql> alter table employee add emp_position char;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| emp_id       | int     | YES  |     | NULL    |       |
+| emp_name     | char(1) | YES  |     | NULL    |       |
+| emp_dept     | char(1) | YES  |     | NULL    |       |
+| emp_salary   | int     | YES  |     | NULL    |       |
+| emp_age      | int     | YES  |     | NULL    |       |
+| emp_position | char(1) | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> alter table employee drop emp_age;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+---------+------+-----+---------+-------+
+| Field        | Type    | Null | Key | Default | Extra |
++--------------+---------+------+-----+---------+-------+
+| emp_id       | int     | YES  |     | NULL    |       |
+| emp_name     | char(1) | YES  |     | NULL    |       |
+| emp_dept     | char(1) | YES  |     | NULL    |       |
+| emp_salary   | int     | YES  |     | NULL    |       |
+| emp_position | char(1) | YES  |     | NULL    |       |
++--------------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
