@@ -1,0 +1,75 @@
+mysql> use student;
+Database changed
+mysql> create table freshers(id int(255),name varchar(255),age int,company varchar(255),salary int);
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> desc freshers;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int          | YES  |     | NULL    |       |
+| name    | varchar(255) | YES  |     | NULL    |       |
+| age     | int          | YES  |     | NULL    |       |
+| company | varchar(255) | YES  |     | NULL    |       |
+| salary  | int          | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into freshers values('101','rupesh','22','wipro',30000');
+    '> insert into freshers values('101','rupesh','22','wipro',30000');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '');
+insert into freshers values('101','rupesh','22','wipro',30000')' at line 1
+mysql> insert into freshers values('101','rupesh','22','wipro','30000');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into freshers values('102','bhanu','22','cap gemini','40000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into freshers values('103','mahesh','25','infosys','50000');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into freshers values('104','sasi','28','amazon','60000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from freshers;
++------+--------+------+------------+--------+
+| id   | name   | age  | company    | salary |
++------+--------+------+------------+--------+
+|  101 | rupesh |   22 | wipro      |  30000 |
+|  102 | bhanu  |   22 | cap gemini |  40000 |
+|  103 | mahesh |   25 | infosys    |  50000 |
+|  104 | sasi   |   28 | amazon     |  60000 |
++------+--------+------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select count(name) from freshers;
++-------------+
+| count(name) |
++-------------+
+|           4 |
++-------------+
+1 row in set (0.02 sec)
+
+mysql> select max(salary) from freshers;
++-------------+
+| max(salary) |
++-------------+
+|       60000 |
++-------------+
+1 row in set (0.01 sec)
+
+mysql> select min(salary) from freshers;
++-------------+
+| min(salary) |
++-------------+
+|       30000 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(salary)from freshers;
++-------------+
+| sum(salary) |
++-------------+
+|      180000 |
++-------------+
+1 row in set (0.00 sec)
