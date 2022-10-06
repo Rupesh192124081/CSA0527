@@ -1,0 +1,57 @@
+mysql> select * from FRIENDS;
++------+-----------+------+--------+-------------+
+| id   | name      | age  | gender | place       |
++------+-----------+------+--------+-------------+
+|  101 | rahul     |   18 | m      | kadapa      |
+|  102 | bhanu     |   19 | m      | hyderabad   |
+|  103 | rupesh    |   20 | m      | chittore    |
+|  104 | angelina  |   23 | f      | switzerland |
+|  105 | john wick |   25 | m      | usa         |
+|  106 | alexa     |   20 | f      | australia   |
++------+-----------+------+--------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select name,gender from FRIENDS group by age order by name;
++-----------+--------+
+| name      | gender |
++-----------+--------+
+| angelina  | f      |
+| bhanu     | m      |
+| john wick | m      |
+| rahul     | m      |
+| rupesh    | m      |
++-----------+--------+
+5 rows in set (0.11 sec)
+
+mysql> select id,place from FRIENDS group by name;
++------+-------------+
+| id   | place       |
++------+-------------+
+|  106 | australia   |
+|  104 | switzerland |
+|  102 | hyderabad   |
+|  105 | usa         |
+|  101 | kadapa      |
+|  103 | chittore    |
++------+-------------+
+6 rows in set (0.00 sec)
+
+
+mysql> select id,age from FRIENDS group by gender having id < 103;
++------+------+
+| id   | age  |
++------+------+
+|  101 |   18 |
++------+------+
+1 row in set (0.00 sec)
+
+mysql> select id,age from FRIENDS group by place having id < 105;
++------+------+
+| id   | age  |
++------+------+
+|  103 |   20 |
+|  102 |   19 |
+|  101 |   18 |
+|  104 |   23 |
++------+------+
+4 rows in set (0.00 sec)
