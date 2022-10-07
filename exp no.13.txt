@@ -1,0 +1,129 @@
+mysql> use students;
+ERROR 1049 (42000): Unknown database 'students'
+mysql> use student;
+Database changed
+mysql> desc freshers;
++---------+--------------+------+-----+---------+-------+
+| Field   | Type         | Null | Key | Default | Extra |
++---------+--------------+------+-----+---------+-------+
+| id      | int(11)      | YES  |     | NULL    |       |
+| name    | varchar(225) | YES  |     | NULL    |       |
+| age     | int(11)      | YES  |     | NULL    |       |
+| company | varchar(225) | YES  |     | NULL    |       |
+| salary  | int(11)      | YES  |     | NULL    |       |
++---------+--------------+------+-----+---------+-------+
+5 rows in set (0.03 sec)
+
+mysql> insert into freshers values('101','rupesh','20','wipro','50000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into freshers values('102','sunny','21','tata','60000');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into freshers values('103','bhanu','22','cap gemini','70000');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into freshers values('104','mahesh','23','dell','55000');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select  * from freshers;
++------+--------+------+------------+--------+
+| id   | name   | age  | company    | salary |
++------+--------+------+------------+--------+
+|  101 | rupesh |   20 | wipro      |  50000 |
+|  102 | sunny  |   21 | tata       |  60000 |
+|  103 | bhanu  |   22 | cap gemini |  70000 |
+|  104 | mahesh |   23 | dell       |  55000 |
++------+--------+------+------------+--------+
+4 rows in set (0.02 sec)
+
+mysql> START TRANSCATION;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TRANSCATION' at line 1
+mysql> start transcation;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'transcation' at line 1
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into freshers(id,name,age,company,salary)values(106,"prakash",26,"tesla",80000),(107,"sasi",27,"amazon",65000);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select * from freshers;
++------+---------+------+------------+--------+
+| id   | name    | age  | company    | salary |
++------+---------+------+------------+--------+
+|  101 | rupesh  |   20 | wipro      |  50000 |
+|  102 | sunny   |   21 | tata       |  60000 |
+|  103 | bhanu   |   22 | cap gemini |  70000 |
+|  104 | mahesh  |   23 | dell       |  55000 |
+|  106 | prakash |   26 | tesla      |  80000 |
+|  107 | sasi    |   27 | amazon     |  65000 |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> set autocommit = 0;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> savepoint ins;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update freshers set name
+    -> update freshers set name = "stark" where id =101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'update freshers set name = "stark" where id =101' at line 2
+mysql> update freshers set name = "stark" where id =101;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from freshers;
++------+---------+------+------------+--------+
+| id   | name    | age  | company    | salary |
++------+---------+------+------------+--------+
+|  101 | stark   |   20 | wipro      |  50000 |
+|  102 | sunny   |   21 | tata       |  60000 |
+|  103 | bhanu   |   22 | cap gemini |  70000 |
+|  104 | mahesh  |   23 | dell       |  55000 |
+|  106 | prakash |   26 | tesla      |  80000 |
+|  107 | sasi    |   27 | amazon     |  65000 |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> savepoint upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from freshers where id = 106;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from freshers;
++------+--------+------+------------+--------+
+| id   | name   | age  | company    | salary |
++------+--------+------+------------+--------+
+|  101 | stark  |   20 | wipro      |  50000 |
+|  102 | sunny  |   21 | tata       |  60000 |
+|  103 | bhanu  |   22 | cap gemini |  70000 |
+|  104 | mahesh |   23 | dell       |  55000 |
+|  107 | sasi   |   27 | amazon     |  65000 |
++------+--------+------+------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> savepoint del;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from freshers;
++------+---------+------+------------+--------+
+| id   | name    | age  | company    | salary |
++------+---------+------+------------+--------+
+|  101 | stark   |   20 | wipro      |  50000 |
+|  102 | sunny   |   21 | tata       |  60000 |
+|  103 | bhanu   |   22 | cap gemini |  70000 |
+|  104 | mahesh  |   23 | dell       |  55000 |
+|  106 | prakash |   26 | tesla      |  80000 |
+|  107 | sasi    |   27 | amazon     |  65000 |
++------+---------+------+------------+--------+
+6 rows in set (0.00 sec)
